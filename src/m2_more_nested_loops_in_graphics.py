@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Ethan Baker.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -49,10 +49,45 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
 
+    height = rectangle.get_height()
+    width = rectangle.get_width()
+    upper_left_corner = rectangle.get_upper_left_corner()
+    lower_right_corner = rectangle.get_lower_right_corner()
+    x_ul = upper_left_corner.x
+    y_ul = upper_left_corner.y
+    x_lr = lower_right_corner.x
+    y_lr = lower_right_corner.y
+
+    original_x_ul = upper_left_corner.x
+    original_y_ul = upper_left_corner.y
+    original_x_lr = lower_right_corner.x
+    original_y_lr = lower_right_corner.y
+
+    for k in range(n):
+        for j in range(k + 1):
+            rect = rg.Rectangle(rg.Point(x_ul, y_ul), rg.Point(x_lr, y_lr))
+            rect.attach_to(window)
+            window.render()
+            x_ul = x_ul + width
+            x_lr = x_lr + width
+        x_ul = original_x_ul
+        y_ul = original_y_ul
+        x_lr = original_x_lr
+        y_lr = original_y_lr
+
+        x_ul = x_ul - (width / 2)
+        y_ul = y_ul - height
+        x_lr = x_lr - (width / 2)
+        y_lr = y_lr - height
+
+        original_x_ul = x_ul
+        original_y_ul = y_ul
+        original_x_lr = x_lr
+        original_y_lr = y_lr
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
